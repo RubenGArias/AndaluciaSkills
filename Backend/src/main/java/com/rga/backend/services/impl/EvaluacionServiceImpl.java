@@ -6,34 +6,33 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rga.backend.models.Prueba;
-import com.rga.backend.repositories.PruebaRepository;
-import com.rga.backend.services.PruebaService;
+import com.rga.backend.models.Evaluacion;
+import com.rga.backend.repositories.EvaluacionRepository;
+import com.rga.backend.services.EvaluacionService;
 
 @Service
-public class PruebaServiceImpl implements PruebaService{
+public class EvaluacionServiceImpl implements EvaluacionService{
     @Autowired
-    private PruebaRepository repository;
+    private EvaluacionRepository repository;
 
     @Override
-    public List<Prueba> findAll() {
+    public List<Evaluacion> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Optional<Prueba> findById(Long id) {
+    public Optional<Evaluacion> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public Prueba save(Prueba prueba) {
-        return repository.save(prueba);
+    public Evaluacion save(Evaluacion evaluacion) {
+        return repository.save(evaluacion);
     }
 
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
     }
-    
 
 }

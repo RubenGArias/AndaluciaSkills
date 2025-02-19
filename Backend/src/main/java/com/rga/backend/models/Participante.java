@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name ="participante") //TODO Ver si la mayuscula del principio es necesaria
+@Table(name ="Participante") //TODO Ver si la mayuscula del principio es necesaria
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
