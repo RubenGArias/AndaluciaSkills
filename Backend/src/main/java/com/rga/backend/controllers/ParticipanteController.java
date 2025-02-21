@@ -15,17 +15,17 @@ import com.rga.backend.models.Participante;
 import com.rga.backend.services.ParticipanteService;
 
 @RestController
-@RequestMapping("/participantes")
+@RequestMapping("/api")
 public class ParticipanteController {
     @Autowired
     private ParticipanteService participanteService;
 
-    @GetMapping
+    @GetMapping("/participantes")
     public List<Participante> getAllParticipantes(){
         return participanteService.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/participante/{id}")
     public Optional<Participante> getParticipanteById(@PathVariable Long id){
         return participanteService.findById(id);
     }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -14,7 +15,7 @@ export class LoginComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router:Router) {}
 
   login() {
     console.log('Datos enviados:', this.username, this.password); // ✅ Depuración
@@ -23,7 +24,8 @@ export class LoginComponent {
       .subscribe({
         next: response => {
           console.log('Token recibido:', response.token);
-          localStorage.setItem('token', response.token);
+          this.authService.saveToken(response.token);
+          this.router.navigate(['/participantes']);
         },
         error: error => {
           console.error('Error en login:', error);

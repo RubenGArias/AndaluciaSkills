@@ -1,0 +1,78 @@
+/* Contenedor principal */
+.login-container {
+    width: 350px;
+    margin: 100px auto;
+    padding: 2rem;
+    background-color: #f7fcf8;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título */
+  .login-container h2 {
+    margin-bottom: 1.5rem;
+    color: #2c502f;
+    font-size: 1.8rem;
+  }
+  
+  /* Estilos generales para los campos */
+  .login-container label {
+    display: block;
+    text-align: left;
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+    color: #345e3d;
+  }
+  
+  .login-container input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  /* Resaltar input al hacer focus */
+  .login-container input:focus {
+    border-color: #29b954;
+    outline: none;
+  }
+  
+  /* Botón de login */
+  .login-container button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #29b954;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-container button:hover {
+    background-color: #34db58;
+  }
+  
+  /* Mensaje de error */
+  .error {
+    color: #e74c3c;
+    margin-top: 1rem;
+    font-weight: 600;
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .login-container {
+      width: 90%;
+      margin: 50px auto;
+      padding: 1.5rem;
+    }
+  }
+  

@@ -1,6 +1,8 @@
 package com.rga.backend.security;
 
 import io.jsonwebtoken.*;
+
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +19,18 @@ public class JwtTokenProvider {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
+        System.out.println("Aurorities del user:" + userDetails.getAuthorities());
+
+        String role = userDetails.getAuthorities().stream()
+                    .findFirst()
+                    .map(GrantedAuthority::getAuthority)
+                    .orElse("ROLE_ADMIN");
+
+        System.out.println("Rol" + role);
+
         return Jwts.builder()
                 .setSubject(userDetails.getUsername()) // El sujeto es el username
+                .claim("role", role)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret) // Firmar con HS512

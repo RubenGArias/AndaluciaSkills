@@ -1,0 +1,35 @@
+<div class="container">
+    <h2>Lista de Participantes</h2>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="participantes.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Centro</th>
+                <th *ngIf="esExperto">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let participante of participantes; let i = index">
+                <td>{{ participante.id }}</td>
+                <td>{{ participante.nombre }}</td>
+                <td>{{ participante.apellidos }}</td>
+                <td>{{ participante.centro }}</td>
+                <td *ngIf="esExperto">
+                    <button>Evaluar</button>
+                    <button>Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="participantes.length === 0 && !errorMessage">
+        No hay participantes registrados
+    </div>
+</div>

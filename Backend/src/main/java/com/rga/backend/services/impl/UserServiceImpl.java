@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -86,8 +88,9 @@ public class UserServiceImpl implements UserService {
             User user = userOptional.get();
             if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
                 // Generar token usando la instancia de jwtTokenProvider
+                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));
                 UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                    user.getUsername(), user.getPassword(), new ArrayList<>()
+                    user.getUsername(), user.getPassword(), authorities
                 );
                 String token = jwtTokenProvider.generateToken(userDetails); // Ahora sí funciona
 
@@ -95,6 +98,7 @@ public class UserServiceImpl implements UserService {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "Login exitoso");
                 response.put("username", user.getUsername());
+                response.put("role", user.getRole());
                 response.put("token", token);
 
                 return ResponseEntity.ok(response);

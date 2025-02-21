@@ -31,6 +31,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/api/participantes").permitAll()
                     .requestMatchers("/error").permitAll() // Permitir acceso a la ruta de error
                     .anyRequest().authenticated()
                 )

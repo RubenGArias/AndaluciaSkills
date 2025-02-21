@@ -1,6 +1,5 @@
 package com.rga.backend.security;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
