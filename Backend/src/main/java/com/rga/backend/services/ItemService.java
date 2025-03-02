@@ -8,7 +8,9 @@ import com.rga.backend.models.Item;
 public interface ItemService {
     List<Item> findAll();
     Optional<Item> findById(Long  id);
-    Item save(Item item);
+    Item save(Item item, Long idPrueba);
     void deleteById(Long id);
+    List<Item> findByPruebaId(Long id);
+
 
 }

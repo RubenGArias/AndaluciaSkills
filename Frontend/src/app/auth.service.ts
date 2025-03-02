@@ -31,7 +31,9 @@ export class AuthService {
   
         this.userSubject.next({
           username: decodedToken.sub, // Asumiendo que 'sub' es el username
-          role: decodedToken.role
+          role: decodedToken.role,
+          idUsuario: decodedToken.idUsuario,
+          idEspecialidad: decodedToken.idEspecialidad
         });
       } catch (error) {
         console.error('Error al decodificar el token:', error);
@@ -67,6 +69,14 @@ export class AuthService {
     return !!sessionStorage.getItem('token');
   }
 
+  getEspecialidadUser(username: string): Observable<any> {
+    return this.http.get(this.apiUrl + `/especialidad/${username}`);
+  }
+
+  getIdEspecialidad(): number | null {
+    const user = this.userSubject.value;
+    return user ? user.idEspecialidad : null;
+  }
 
 
 }

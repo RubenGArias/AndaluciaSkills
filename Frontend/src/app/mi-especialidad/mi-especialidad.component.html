@@ -1,0 +1,66 @@
+<div class="container">
+    <h2>Detalles de Mi Especialidad</h2>
+
+    <div *ngIf="especialidad">
+        <p><strong>Nombre:</strong> {{ especialidad.nombre }}</p>
+        <p><strong>Código:</strong> {{ especialidad.codigo }}</p>
+    </div>
+
+    <h3>Pruebas de {{ especialidad.codigo }}</h3>
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="pruebas.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Enunciado</th>
+                <th>Puntuación Máxima</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let prueba of pruebas; let i = index">
+                <!-- Fila de la prueba -->
+                <tr>
+                    <td><strong>{{ i + 1 }}</strong></td>
+                    <td><strong>{{ prueba.enunciado }}</strong></td>
+                    <td><strong>{{ prueba.puntuacion_maxima }}</strong></td>
+                </tr>
+
+                <!-- Fila con tabla de ítems de la prueba -->
+                <tr *ngIf="itemsPorPrueba && itemsPorPrueba[prueba.id] && itemsPorPrueba[prueba.id].length > 0">
+                    <td colspan="3">
+                        <table class="table table-bordered sub-table">
+                            <thead>
+                                <tr>
+                                    <th>Ítem</th>
+                                    <th>Peso</th>
+                                    <th>Grados de Consecuación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of itemsPorPrueba[prueba.id]">
+                                    <td>{{ item.descripcion }}</td>
+                                    <td>{{ item.peso }}</td>
+                                    <td>{{ item.gradosConsecucion }}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <button (click)="navigateToAddItem(prueba.id)" class="btn btn-primary">Añadir Item +</button>
+            </ng-container>
+            <tr>
+                <td colspan="3" class="text-center">
+                    <button (click)="navigateTo('/addprueba')" class="btn btn-secondary">Añadir Prueba +</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="pruebas.length === 0 && !errorMessage">
+        No hay pruebas registradas para esta especialidad.
+    </div>
+</div>

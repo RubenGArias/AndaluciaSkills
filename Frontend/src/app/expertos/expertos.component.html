@@ -1,1 +1,39 @@
-<p>expertos works!</p>
+
+<div class="container">
+    <h2>Lista de Expertos</h2>
+
+    <div>
+        <button (click)="navigateTo('/add-experto')">Nuevo Experto +</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="expertos.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre de Usuario</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th *ngIf="esAdmin">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let experto of expertos; let i = index">
+                <td>{{ experto.id }}</td>
+                <td>{{ experto.username }}</td>
+                <td>{{ experto.nombre }}</td>
+                <td>{{ experto.apellidos }}</td>
+                <td *ngIf="esAdmin">
+                    <button>Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="expertos.length === 0 && !errorMessage">
+        No hay expertos registrados
+    </div>
+</div>

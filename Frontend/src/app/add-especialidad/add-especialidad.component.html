@@ -1,0 +1,25 @@
+<div class="add-participant-container">
+    <h2>Añadir Especialidad</h2>
+  
+    <form (ngSubmit)="onSubmit()" #especialidadForm="ngForm">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="especialidad.nombre" name="nombre" placeholder="Introduce el nombre" required>
+      </div>
+  
+      <!-- Código -->
+      <div>
+        <label for="codigo">Código:</label>
+        <input type="text" id="codigo" [(ngModel)]="especialidad.codigo" name="codigo" placeholder="Introduce los apellidos" required>
+      </div>
+  
+  
+      <!-- Botón -->
+      <button type="submit">Añadir Especialidad</button>
+    </form>
+  
+    <!-- Mensaje -->
+    <p *ngIf="message" class="mensaje">{{ message }}</p>
+  </div>
+  

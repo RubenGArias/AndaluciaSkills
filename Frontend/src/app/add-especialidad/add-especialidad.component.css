@@ -1,0 +1,60 @@
+.add-participant-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .add-participant-container h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+  
+  .add-participant-container form div {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .add-participant-container label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+  
+  .add-participant-container input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .add-participant-container input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+  }
+  
+  .add-participant-container button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-participant-container button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .add-participant-container .mensaje {
+    color: #28a745;
+    margin-top: 15px;
+  }
+  

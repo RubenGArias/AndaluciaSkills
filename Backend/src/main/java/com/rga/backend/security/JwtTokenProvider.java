@@ -27,14 +27,33 @@ public class JwtTokenProvider {
                     .orElse("ROLE_ADMIN");
 
         System.out.println("Rol" + role);
+        Long idUsuario = null;
+        Long idEspecialidad = null;
+
+        System.out.println("Tipo de userDetails: " + userDetails.getClass().getName());
+
+        if(userDetails instanceof CustomUserDetails){
+            CustomUserDetails customUserDetails = (CustomUserDetails) userDetails;
+            idUsuario = customUserDetails.getIdUsuario();
+            idEspecialidad = customUserDetails.getIdEspecialidad();
+
+        } else {
+            System.out.println("userDetails NO es una instancia de CustomUserDetails");
+        }
+        
+        System.out.println("idUsuario: " + idUsuario); 
+        System.out.println("idEspecialidad: " + idEspecialidad); 
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername()) // El sujeto es el username
                 .claim("role", role)
+                .claim("idUsuario", idUsuario)
+                .claim("idEspecialidad", idEspecialidad)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, jwtSecret) // Firmar con HS512
                 .compact();
+
     }
 
     // 🔹 Obtiene el username desde el token

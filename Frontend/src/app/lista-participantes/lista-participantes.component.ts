@@ -3,6 +3,7 @@ import { ParticipantesService } from '../participantes.service';
 import { NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-participantes',
@@ -15,7 +16,7 @@ export class ListaParticipantesComponent implements OnInit{
   errorMessage: string = '';
   esExperto: boolean = false;
 
-  constructor(private participantesService: ParticipantesService, private authService: AuthService){}
+  constructor(private participantesService: ParticipantesService, private authService: AuthService, private  router: Router){}
 
   ngOnInit(): void {
     this.verificarRol();
@@ -37,5 +38,9 @@ export class ListaParticipantesComponent implements OnInit{
         this.errorMessage = 'Error al cargar los participantes';
       }
     })
+  }
+
+  navigateTo(path: string){
+    this.router.navigate([path]);
   }
 }

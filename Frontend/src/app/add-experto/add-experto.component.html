@@ -1,0 +1,49 @@
+<div class="add-experto-container">
+    <h2>Añadir Experto</h2>
+  
+    <form (ngSubmit)="onSubmit()" #expertoForm="ngForm">
+      <!-- Nombre -->
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" [(ngModel)]="experto.nombre" name="nombre" placeholder="Introduce el nombre" required>
+      </div>
+  
+      <!-- Apellidos -->
+      <div>
+        <label for="apellidos">Apellidos:</label>
+        <input type="text" id="apellidos" [(ngModel)]="experto.apellidos" name="apellidos" placeholder="Introduce los apellidos" required>
+      </div>
+
+      <div>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" [(ngModel)]="experto.dni" name="dni" placeholder="Introduce el dni" required>
+      </div>
+  
+      <!-- Especialidad -->
+      <div>
+        <label for="especialidad">Especialidad:</label>
+        <select id="especialidad" [(ngModel)]="experto.idEspecialidad" name="idEspecialidad" required>
+          <option [value]="null" disabled selected>Selecciona una especialidad</option>
+          <option *ngFor="let esp of especialidades" [value]="esp.id">{{ esp.nombre }}</option>
+        </select>
+      </div>
+  
+      <!-- Username -->
+      <div>
+        <label for="username">Nombre de usuario:</label>
+        <input type="text" id="username" [(ngModel)]="experto.username" name="username" placeholder="Introduce el username" required>
+      </div>
+
+      <div>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" [(ngModel)]="experto.password" name="password" placeholder="Introduce la contraseña" required>
+      </div>
+  
+      <!-- Botón -->
+      <button type="submit">Añadir Experto</button>
+    </form>
+  
+    <!-- Mensaje -->
+    <p *ngIf="message" class="mensaje">{{ message }}</p>
+  </div>
+  

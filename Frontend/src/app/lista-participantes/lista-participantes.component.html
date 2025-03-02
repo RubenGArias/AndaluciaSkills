@@ -12,7 +12,6 @@
                 <th>Nombre</th>
                 <th>Apellidos</th>
                 <th>Centro</th>
-                <th *ngIf="esExperto">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +20,6 @@
                 <td>{{ participante.nombre }}</td>
                 <td>{{ participante.apellidos }}</td>
                 <td>{{ participante.centro }}</td>
-                <td *ngIf="esExperto">
-                    <button>Evaluar</button>
-                    <button>Editar</button>
-                </td>
             </tr>
         </tbody>
     </table>

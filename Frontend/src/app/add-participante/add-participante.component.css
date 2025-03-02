@@ -1,0 +1,83 @@
+/* Contenedor principal */
+.add-participant-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título */
+  .add-participant-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+  
+  /* Campos del formulario */
+  .add-participant-container form div {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Etiquetas */
+  .add-participant-container label {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #34495e;
+  }
+  
+  /* Inputs */
+  .add-participant-container input[type="text"],
+  .add-participant-container input[type="centro"] {
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+  }
+  
+  .add-participant-container input:focus {
+    border-color: #3498db;
+    outline: none;
+  }
+  
+  /* Botón */
+  .add-participant-container button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .add-participant-container button:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Mensaje de éxito/error */
+  .mensaje {
+    margin-top: 1rem;
+    text-align: center;
+    font-weight: bold;
+    color: #27ae60; /* Verde para éxito */
+  }
+  
+  .mensaje.error {
+    color: #e74c3c; /* Rojo para errores */
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .add-participant-container {
+      padding: 1rem;
+    }
+  }
+  

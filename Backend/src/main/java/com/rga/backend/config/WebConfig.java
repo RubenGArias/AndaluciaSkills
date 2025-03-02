@@ -1,5 +1,9 @@
 package com.rga.backend.config;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -20,5 +24,11 @@ public class WebConfig {
                         .allowCredentials(true);
             }
         };
+    }
+
+    @Bean
+    public String crearDirectorioArchivos() throws IOException {
+        Files.createDirectories(Paths.get("files"));
+        return "Directorio 'files' creado correctamente";
     }
 }

@@ -25,7 +25,7 @@ export class LoginComponent {
         next: response => {
           console.log('Token recibido:', response.token);
           this.authService.saveToken(response.token);
-          this.router.navigate(['/participantes']);
+          this.router.navigate(['/inicio']);
         },
         error: error => {
           console.error('Error en login:', error);

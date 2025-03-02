@@ -1,6 +1,5 @@
 package com.rga.backend.services.impl;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +19,7 @@ import com.rga.backend.repositories.EspecialidadRepository;
 import com.rga.backend.repositories.UserRepository;
 import com.rga.backend.requests.LoginRequest;
 import com.rga.backend.requests.RegisterRequest;
+import com.rga.backend.security.CustomUserDetails;
 import com.rga.backend.security.JwtTokenProvider;
 import com.rga.backend.services.UserService;
 
@@ -57,6 +57,11 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    @Override
+    public List<User> findExpertos(){
+            return userRepository.findByRole("ROLE_EXPERTO");
+    }
+
     @Transactional
     public ResponseEntity<?> register(RegisterRequest request) {
         if (userRepository.findByUsername(request.getUsername()).isPresent()) {
@@ -77,36 +82,49 @@ public class UserServiceImpl implements UserService {
             .build();
 
         userRepository.save(user);
-        return ResponseEntity.ok("Usuario creado correctamente");
+        return ResponseEntity.ok().body("{\"message\": \"Usuario creado correctamente\"}");
     }
 
-    @Transactional
-    public ResponseEntity<?> login(LoginRequest request) {
-        Optional<User> userOptional = userRepository.findByUsername(request.getUsername());
+@Transactional
+public ResponseEntity<?> login(LoginRequest request) {
+    Optional<User> userOptional = userRepository.findByUsername(request.getUsername());
 
-        if (userOptional.isPresent()) {
-            User user = userOptional.get();
-            if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                // Generar token usando la instancia de jwtTokenProvider
-                List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(user.getRole()));
-                UserDetails userDetails = new org.springframework.security.core.userdetails.User(
-                    user.getUsername(), user.getPassword(), authorities
-                );
-                String token = jwtTokenProvider.generateToken(userDetails); // Ahora sí funciona
+    if (userOptional.isPresent()) {
+        User user = userOptional.get();
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            // Usa CustomUserDetails en lugar de User
+            UserDetails userDetails = new CustomUserDetails(user);
 
-                // Crear un JSON con el mensaje y el token
-                Map<String, Object> response = new HashMap<>();
-                response.put("message", "Login exitoso");
-                response.put("username", user.getUsername());
-                response.put("role", user.getRole());
-                response.put("token", token);
+            String token = jwtTokenProvider.generateToken(userDetails);
 
-                return ResponseEntity.ok(response);
-            } else {
-                return ResponseEntity.badRequest().body(Map.of("error", "Contraseña incorrecta"));
-            }
+            // Crear un JSON con el mensaje y el token
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Login exitoso");
+            response.put("username", user.getUsername());
+            response.put("role", user.getRole());
+            response.put("idUser", user.getId());
+            response.put("idEspecialidad", user.getEspecialidad().getId());
+            response.put("token", token);
+
+            return ResponseEntity.ok(response);
         } else {
-            return ResponseEntity.badRequest().body(Map.of("error", "Usuario no encontrado"));
+            return ResponseEntity.badRequest().body(Map.of("error", "Contraseña incorrecta"));
+        }
+    } else {
+        return ResponseEntity.badRequest().body(Map.of("error", "Usuario no encontrado"));
+    }
+}
+
+
+    @Transactional
+    public Especialidad findEspecialidadByUsername(String username){
+        Optional<User> userOptional = userRepository.findByUsername(username);
+        User user = userOptional.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        if (user != null){
+            return user.getEspecialidad();
+        } else {
+            return null;
         }
     }
 

@@ -1,0 +1,39 @@
+<div class="container">
+  <h2>Evaluar Participante</h2>
+  <form (ngSubmit)="onSubmit(evaluacionForm)" #evaluacionForm="ngForm">
+    <div *ngFor="let prueba of pruebas" class="prueba-card">
+      <h3>{{ prueba.enunciado }}</h3>
+      <p class="puntuacion-maxima">Puntuación máxima: {{ prueba.puntuacion_maxima }}</p>
+
+      <div *ngFor="let item of itemsPorPrueba[prueba.id]" class="item-card">
+        <label class="item-description">{{ item.descripcion }}</label>
+        <div class="grados-consecucion">
+          <!-- Generar grados dinámicamente según item.gradosConsecucion -->
+          <div *ngFor="let grado of getGradosConsecucion(item.gradosConsecucion)" class="grado-option">
+            <input
+              type="radio"
+              name="item_{{ item.id }}"
+              [value]="grado"
+              [(ngModel)]="item.valoracion"
+              required
+            />
+            <span class="grado-label">{{ grado }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje de error si el formulario no es válido -->
+    <div *ngIf="evaluacionForm.invalid && evaluacionForm.submitted" class="error-message">
+      Por favor, selecciona una valoración para todos los ítems.
+    </div>
+
+    <!-- Botón para guardar la evaluación -->
+    <button type="submit" class="save-button">Guardar Evaluación</button>
+
+    <!-- Mensaje de éxito -->
+    <div *ngIf="showSuccessMessage" class="success-message">
+      Evaluación guardada con éxito.
+    </div>
+  </form>
+</div>

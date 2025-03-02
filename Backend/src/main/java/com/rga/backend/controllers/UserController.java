@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rga.backend.models.Especialidad;
 import com.rga.backend.models.User;
 import com.rga.backend.requests.LoginRequest;
 import com.rga.backend.requests.RegisterRequest;
 import com.rga.backend.services.UserService;
+
 
 @RestController
 @RequestMapping("/api/auth")
@@ -33,6 +35,12 @@ public class UserController {
         return userService.findAll();
     }
 
+    @GetMapping("/expertos")
+    public List<User> getExpertos() {
+        return userService.findExpertos();
+    }
+    
+
     @GetMapping("/{id}")
     public Optional<User> getUserById(@PathVariable Long id){
         return userService.findById(id);
@@ -46,6 +54,16 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request){
         return userService.login(request);
+    }
+
+    @GetMapping("/especialidad/{username}")
+    public ResponseEntity<Especialidad> getEspecialidadByUsername(@PathVariable String username) {
+        Especialidad especialidad = userService.findEspecialidadByUsername(username);
+        if (especialidad != null) {
+            return ResponseEntity.ok(especialidad);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

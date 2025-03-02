@@ -1,0 +1,38 @@
+<div class="add-participant-container">
+  <h2>Añadir Participante</h2>
+
+  <form (ngSubmit)="onSubmit()" #participanteForm="ngForm">
+    <!-- Nombre -->
+    <div>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" [(ngModel)]="participante.nombre" name="nombre" placeholder="Introduce el nombre" required>
+    </div>
+
+    <!-- Apellidos -->
+    <div>
+      <label for="apellidos">Apellidos:</label>
+      <input type="text" id="apellidos" [(ngModel)]="participante.apellidos" name="apellidos" placeholder="Introduce los apellidos" required>
+    </div>
+
+    <!-- Especialidad -->
+    <div>
+      <label for="especialidad">Especialidad:</label>
+      <select id="especialidad" [(ngModel)]="participante.idEspecialidad" name="idEspecialidad" required>
+        <option [value]="null" disabled selected>Selecciona una especialidad</option>
+        <option *ngFor="let esp of especialidades" [value]="esp.id">{{ esp.nombre }}</option>
+      </select>
+    </div>
+
+    <!-- Centro -->
+    <div>
+      <label for="centro">Centro:</label>
+      <input type="text" id="centro" [(ngModel)]="participante.centro" name="centro" placeholder="Introduce el centro" required>
+    </div>
+
+    <!-- Botón -->
+    <button type="submit">Añadir Participante</button>
+  </form>
+
+  <!-- Mensaje -->
+  <p *ngIf="message" class="mensaje">{{ message }}</p>
+</div>

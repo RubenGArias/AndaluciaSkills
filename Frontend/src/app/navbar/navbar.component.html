@@ -2,7 +2,7 @@
   <ul class="nav-links">
     <li><a (click)="navigateTo('/inicio')">Inicio</a></li>
 
-    <li *ngIf="logeado && role === 'ROLE_ADMIN'">
+    <li *ngIf="logeado && role === 'ROLE_ADMIN' || logeado && role === 'ROLE_EXPERTO'">
       <a (click)="navigateTo('/especialidades')" class="nav-link">Especialidades</a>
     </li>
     <li *ngIf="logeado && role === 'ROLE_ADMIN'">
@@ -11,9 +11,11 @@
     <li *ngIf="logeado && role === 'ROLE_ADMIN'">
       <a (click)="navigateTo('/ganadores')" class="nav-link">Ganadores</a>
     </li>
-
     <li *ngIf="logeado && role === 'ROLE_EXPERTO'">
-      <a (click)="navigateTo('/participantes')" class="nav-link">Participantes</a>
+      <a (click)="navigateTo('/miespecialidad')" class="nav-link">Mi Especialidad</a>
+    </li>
+    <li *ngIf="logeado && role === 'ROLE_EXPERTO'">
+      <a (click)="navigateTo('/alumnos')" class="nav-link">Mis Alumnos</a>
     </li>
   </ul>
 

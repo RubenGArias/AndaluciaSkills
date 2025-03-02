@@ -1,1 +1,37 @@
-<p>especialidades works!</p>
+<div class="container">
+    <h2>Lista de Especialidades</h2>
+
+    <div *ngIf="esAdmin">
+        <button (click)="navigateTo('/add-especialidad')">Nueva Especialidad +</button>
+    </div>
+
+    <div *ngIf="errorMessage" class="error">
+        {{ errorMessage }}
+    </div>
+
+    <table *ngIf="especialidades.length > 0" class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Código</th>
+                <th *ngIf="esAdmin">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let especialidad of especialidades; let i = index">
+                <td>{{ especialidad.id }}</td>
+                <td>{{ especialidad.nombre }}</td>
+                <td>{{ especialidad.codigo }}</td>
+
+                <td *ngIf="esAdmin">
+                    <button>Editar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div *ngIf="especialidades.length === 0 && !errorMessage">
+        No hay especialidades registradas
+    </div>
+</div>
